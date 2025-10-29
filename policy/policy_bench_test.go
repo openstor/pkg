@@ -22,7 +22,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/minio/pkg/v3/policy/condition"
+	"github.com/openstor/pkg/v3/policy/condition"
 )
 
 func setupPolicy(statements []Statement) Policy {

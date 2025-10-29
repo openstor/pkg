@@ -19,11 +19,12 @@ package ilm
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/minio/minio-go/v7/pkg/lifecycle"
+	"github.com/openstor/openstor-go/v7/pkg/lifecycle"
 )
 
 // Used in tags. Ex: --tags "key1=value1&key2=value2&key3=value3"
@@ -257,7 +258,10 @@ func parseExpiryDate(expiryDateStr string) (lifecycle.ExpirationDate, error) {
 func parseExpiryDays(expiryDayStr string) (lifecycle.ExpirationDays, error) {
 	days, e := strconv.Atoi(expiryDayStr)
 	if e != nil {
-		return lifecycle.ExpirationDays(0), e
+		return lifecycle.ExpirationDays(0), fmt.Errorf("invalid expiry days: %v", e)
+	}
+	if days < 0 {
+		return lifecycle.ExpirationDays(0), fmt.Errorf("expiry days cannot be negative")
 	}
 	if days == 0 {
 		return lifecycle.ExpirationDays(0), errZeroExpiryDays

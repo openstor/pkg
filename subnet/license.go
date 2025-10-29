@@ -28,7 +28,7 @@ import (
 	"time"
 
 	"github.com/lestrrat-go/jwx/v2/jwt"
-	"github.com/minio/pkg/v3/licverifier"
+	"github.com/openstor/pkg/v3/licverifier"
 )
 
 const (

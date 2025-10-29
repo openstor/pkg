@@ -24,7 +24,7 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/go-openapi/swag/conv"
-	"github.com/minio/minio-go/v7/pkg/lifecycle"
+	"github.com/openstor/openstor-go/v7/pkg/lifecycle"
 )
 
 func TestOptionFilter(t *testing.T) {
@@ -250,6 +250,26 @@ func TestToILMRule(t *testing.T) {
 			},
 			wantErr: true,
 			errMsg:  errRuleAction.Error(),
+		},
+		{
+			name: "Invalid rule - negative expiry days",
+			opts: LifecycleOptions{
+				ID:         "test-rule-12",
+				Status:     conv.Pointer(true),
+				ExpiryDays: conv.Pointer("-30"),
+			},
+			wantErr: true,
+			errMsg:  "expiry days cannot be negative",
+		},
+		{
+			name: "Invalid rule - empty ID",
+			opts: LifecycleOptions{
+				ID:         "",
+				Status:     conv.Pointer(true),
+				ExpiryDays: conv.Pointer("30"),
+			},
+			wantErr: true,
+			errMsg:  "empty rule ID",
 		},
 		{
 			name: "Invalid rule - invalid expiry date",
@@ -655,6 +675,8 @@ func TestValidationFunctions(t *testing.T) {
 		}
 		if err := validateTranDays(rule); err == nil {
 			t.Error("validateTranDays() should error for negative days")
+		} else if !strings.Contains(err.Error(), "number of days to transition can't be negative") {
+			t.Errorf("validateTranDays() error message should contain 'number of days to transition can't be negative', got: %v", err)
 		}
 
 		// Test STANDARD_IA with less than 30 days

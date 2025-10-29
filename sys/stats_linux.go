@@ -1,5 +1,4 @@
 //go:build linux && !arm && !386
-// +build linux,!arm,!386
 
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
@@ -24,7 +23,7 @@ import (
 	"os"
 	"syscall"
 
-	"github.com/minio/pkg/v3/sys/cgroup"
+	"github.com/openstor/pkg/v3/sys/cgroup"
 )
 
 // Get the final system memory limit chosen by the user.

@@ -22,7 +22,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/minio/minio-go/v7/pkg/set"
+	"github.com/openstor/openstor-go/v7/pkg/set"
 )
 
 const (

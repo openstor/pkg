@@ -20,8 +20,8 @@ package policy
 import (
 	"encoding/json"
 
-	"github.com/minio/minio-go/v7/pkg/set"
-	"github.com/minio/pkg/v3/wildcard"
+	"github.com/openstor/openstor-go/v7/pkg/set"
+	"github.com/openstor/pkg/v3/wildcard"
 )
 
 // Principal - policy principal.

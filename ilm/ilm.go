@@ -18,7 +18,9 @@
 package ilm
 
 import (
-	"github.com/minio/minio-go/v7/pkg/lifecycle"
+	"errors"
+
+	"github.com/openstor/openstor-go/v7/pkg/lifecycle"
 )
 
 const defaultILMDateFormat string = "2006-01-02"
@@ -108,6 +110,9 @@ func (opts LifecycleOptions) ToILMRule() (lifecycle.Rule, error) {
 		nonCurrentVersionTransitionStorageClass string
 	)
 
+	if opts.ID == "" {
+		return lifecycle.Rule{}, errors.New("empty rule ID")
+	}
 	id = opts.ID
 	status = func() string {
 		if opts.Status != nil && !*opts.Status {

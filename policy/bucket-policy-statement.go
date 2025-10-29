@@ -20,7 +20,7 @@ package policy
 import (
 	"strings"
 
-	"github.com/minio/pkg/v3/policy/condition"
+	"github.com/openstor/pkg/v3/policy/condition"
 )
 
 // BPStatement - policy statement.

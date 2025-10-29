@@ -29,7 +29,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/minio/pkg/v3/env"
+	"github.com/openstor/pkg/v3/env"
 	"github.com/rjeczalik/notify"
 )
 
